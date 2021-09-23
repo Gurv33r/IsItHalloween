@@ -29,5 +29,7 @@ func HalloweenCheck(ctx *gin.Context) {
 	if strings.Compare(monthAndDay[0], "10") == 0 && strings.Compare(monthAndDay[1], "31") == 0 {
 		res = "Yes"
 	}
-	ctx.String(http.StatusOK, res)
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": res,
+	})
 }

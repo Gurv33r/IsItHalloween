@@ -1,0 +1,10 @@
+FROM golang:latest
+
+RUN mkdir /build
+
+RUN go build server.go
+
+RUN cp server ./build
+
+CMD [""]
+

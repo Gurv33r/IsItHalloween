@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -10,19 +9,21 @@ import (
 )
 
 func main() {
-	server.KeyboardInterruptHandler()
-	err := godotenv.Load(".env")
+	server.KeyboardInterruptHandler() // clean exit handler
+	err := godotenv.Load(".env")      // check for .env file
+	var PORT string                   // port
 	if err != nil {
-		log.Fatal(".env file does not exist")
+		PORT = "5500" // .env not found
+	} else {
+		PORT = os.Getenv("PORT")
 	}
-	PORT := os.Getenv("PORT")
-
+	// initialize gin router
 	router := gin.Default()
-
+	// host the frontend
 	router.Static("/", "./client")
-
+	// concurrently listen for requests
 	go receive(router)
-
+	// run server
 	router.Run("localhost:" + PORT)
 }
 

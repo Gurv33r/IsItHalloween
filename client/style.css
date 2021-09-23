@@ -1,3 +1,8 @@
+body{
+    background-color: black;
+    color: white;
+}
+
 #result{
     display:block;
     text-align: center;
